@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🌍 Live Currency Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #2b5876, #4e4376);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .converter {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        label {
+            font-size: 14px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background: #fff;
+            color: #333;
+            font-weight: 500;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: #00c9ff;
+            background: linear-gradient(to right, #92fe9d, #00c9ff);
+            border: none;
+            color: #000;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            color: #ffe600;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>🌍 Currency Converter</h1>
+        <form method="post">
+            <label for="amount">Amount:</label>
+            <input type="number" name="amount" id="amount" step="0.01" required>
+
+            <label for="from_currency">From:</label>
+            <select name="from_currency" id="from_currency">
+                {% for code, name in currencies.items() %}
+                    <option value="{{ code }}">{{ code }} - {{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="to_currency">To:</label>
+            <select name="to_currency" id="to_currency">
+                {% for code, name in currencies.items() %}
+                    <option value="{{ code }}">{{ code }} - {{ name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Convert Now</button>
+        </form>
+
+        {% if converted_amount %}
+        <div class="result">
+            ✅ Converted Amount: {{ converted_amount }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
